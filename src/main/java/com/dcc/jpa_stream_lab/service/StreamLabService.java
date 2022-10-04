@@ -175,9 +175,12 @@ public class StreamLabService {
     {
         // Create a new Product object and add that product to the Products table.
         // Return the product
-    	
-
-    	return null;
+        Product newProduct = new Product();
+        newProduct.setName("Bluetooth Headphones");
+        newProduct.setDescription("Wireless, lightweight headphones with Bluetooth connectivity and stereo sound.");
+        newProduct.setPrice(79);
+        products.save(newProduct);
+        return newProduct;
 
     }
 
@@ -195,8 +198,13 @@ public class StreamLabService {
     	// Create a new ShoppingCartItem to represent the new product you created being added to the new User you created's shopping cart.
         // Add the product you created to the user we created in the ShoppingCart junction table.
         // Return the ShoppingcartItem
-
-    	return null;
+        Product headphones = products.findAll().stream().filter(p -> p.getName().equals("Bluetooth Headphones")).findFirst().orElse(null);
+        User david = users.findAll().stream().filter(u -> u.getEmail().equals("david@gmail.com")).findFirst().orElse(null);
+        ShoppingcartItem newCartItem = new ShoppingcartItem();
+        newCartItem.setUser(david);
+        newCartItem.setQuantity(1);
+        newCartItem.setProduct(headphones);
+    	return newCartItem;
     	
     }
 
@@ -214,7 +222,9 @@ public class StreamLabService {
     {
         // Update the price of the product you created to a different value.
         // Return the updated product
-    	return null;
+        Product newPrice = products.findAll().stream().filter(p ->p.getName().equals("Bluetooth Headphones")).findFirst().orElse(null);
+        newPrice.setPrice(83);
+    	return newPrice;
     }
 
     public User UProblemTwo()
