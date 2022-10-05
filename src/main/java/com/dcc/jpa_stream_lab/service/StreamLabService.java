@@ -204,7 +204,8 @@ public class StreamLabService {
         newCartItem.setUser(david);
         newCartItem.setQuantity(1);
         newCartItem.setProduct(headphones);
-    	return newCartItem;
+        return david.addShoppingcartItem(newCartItem);
+
     	
     }
 
@@ -231,8 +232,11 @@ public class StreamLabService {
     {
         // Change the role of the user we created to "Employee"
         // HINT: You need to delete the existing role relationship and then create a new UserRole object and add it to the UserRoles table
-
-    	return null;
+        User newUser = users.findAll().stream().filter(u -> u.getEmail().equals("mike@gmail.com")).findFirst().orElse(null);
+        Roles oldRole = roles.findAll().stream().filter(r -> r.getName().equals("Customer")).findFirst().orElse(null);
+        newUser.removeRole().equals("Customer");
+        newUser.addRole("Employee");
+    	return newUser;
     }
 
     //BONUS:
